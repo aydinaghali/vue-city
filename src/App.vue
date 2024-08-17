@@ -2,6 +2,7 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Increment from './components/Increment.vue';
 import TheWelcome from './components/TheWelcome.vue'
+import { SpeedInsights } from "@vercel/speed-insights/vue"
 </script>
 
 <template>
