@@ -5,6 +5,8 @@
 </script>
 
 <template>
-	<button @click="count++">+</button>
-	<input :value="count"/>
+	<div>
+		<button @click="count++">+</button>
+		<input :value="count"/>
+	</div>
 </template>
