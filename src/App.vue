@@ -16,14 +16,22 @@ const theme = ref(darkTheme);
     <n-global-style />
 
     <main>
-      <n-flex justify="center">
-        <n-input type="text" placeholder="Search city" style="max-width: 30%"/>
-        <n-button>
-          <Icon>
-            <Search12Regular/>
-          </Icon>
-        </n-button>
-      </n-flex>
+      <n-flex vertical>
+        <n-flex justify="center">
+          <n-gradient-text :size=24 type="info">
+            Aydin!
+          </n-gradient-text>
+        </n-flex>
+        
+        <n-flex justify="center">
+          <n-input type="text" placeholder="Search city" style="max-width: 30%"/>
+          <n-button>
+            <Icon>
+              <Search12Regular/>
+            </Icon>
+          </n-button>
+        </n-flex>
+    </n-flex>
     </main>
   
   </n-config-provider>
