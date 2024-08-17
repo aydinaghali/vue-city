@@ -1,53 +1,33 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import Increment from './components/Increment.vue';
-import TheWelcome from './components/TheWelcome.vue'
 import { SpeedInsights } from "@vercel/speed-insights/vue"
+import { ref } from "vue";
+import { darkTheme } from "naive-ui";
+import { Search12Regular } from '@vicons/fluent'
+import { Icon } from '@vicons/utils'
+
+const theme = ref(darkTheme);
 </script>
 
 <template>
   <SpeedInsights/>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  
+  
+  <n-config-provider :theme="theme">
+    <n-global-style />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <!--<TheWelcome />-->
-    <Increment/>
-    <Increment/>
-    <Increment/>
-  </main>
+    <main>
+      <n-flex justify="center">
+        <n-input type="text" placeholder="Search city" style="max-width: 30%"/>
+        <n-button>
+          <Icon>
+            <Search12Regular/>
+          </Icon>
+        </n-button>
+      </n-flex>
+    </main>
+  
+  </n-config-provider>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
