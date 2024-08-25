@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SpeedInsights } from "@vercel/speed-insights/vue"
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { darkTheme, lightTheme } from "naive-ui";
 import { DarkTheme20Regular } from "@vicons/fluent";
 
@@ -35,10 +35,13 @@ function toggleTheme(): void {
         <n-flex justify="center">
           <SearchBar/>
         </n-flex>
-        
-      <!--<n-flex justify="center">
-          <n-button @click="toggleTheme">Toggle</n-button>
-        </n-flex>-->
+
+        <!--<Suspense>-->
+          <!--<SearchResult/>-->
+          <!--<template #fallback>
+            Loading...
+          </template>
+        </Suspense>-->
     </n-flex>
     </main>
   
