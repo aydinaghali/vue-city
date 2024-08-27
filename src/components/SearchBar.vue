@@ -4,48 +4,49 @@ import { Search12Regular } from '@vicons/fluent'
 import { searchCities } from "@/lib/SearchCities.mjs";
 import type { SelectOption } from "naive-ui";
 
+const WaitInterval = 1000;
+
 const text = ref("")
 const options = ref([]);
-/*const options = computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const prefix = text.value.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-		})
-	})*/
+let lastTyped = WaitInterval;
+let timer: NodeJS.Timeout;
 
-  function debounce<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    return function (...args: Parameters<T>) {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(() => {
-            func(...args);
-        }, delay);
-    };
+
+function createSearch(newText: string){
+  return () => {
+    searchCities(newText).then((val)=>
+      val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
+    )).then((val) => options.value = val);
+  }
 }
 
-const debouncedSearch = debounce(
-  (newText) => searchCities(newText).then((val)=>
-    val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
-  )).then((val) => options.value = val),
-  200
-);
-
 watch(text, (newText) => {
-  if(newText.length <= 3) return;
+  options.value = [];
+  clearTimeout(timer);
+
+  let actualLastTyped = lastTyped;
+  lastTyped = performance.now();
+  let elapsed = Math.min(performance.now() - actualLastTyped, 1);
+  if(text.value.length <= 2) return;
+
+  timer = setTimeout(createSearch(newText), WaitInterval - elapsed);
+  
+  if(newText.length <= 2) return;
 
   /*searchCities(newText).then((val)=>
     val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
   )).then((val) => options.value = val);*/
-  debouncedSearch(newText);
+  //++i;
 });
 
 /*function renderLabel(option: SelectOption): VNodeChild{
   return [option.label as string, ", ", (option.value as string).split(",")[1]]
+}*/
+
+/*function showOptions(){
+  searchCities(text.value).then((val)=>
+    val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
+  )).then((val) => options.value = val);
 }*/
 
 </script>
