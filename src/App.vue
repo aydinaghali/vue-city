@@ -5,6 +5,7 @@ import { darkTheme, lightTheme } from "naive-ui";
 import { DarkTheme20Regular } from "@vicons/fluent";
 
 import SearchBar from "./components/SearchBar.vue";
+import GeoJsonMap from "./components/GeoJsonMap.vue";
 
 let theme = ref(darkTheme);
 
@@ -35,13 +36,9 @@ function toggleTheme(): void {
         <n-flex justify="center">
           <SearchBar/>
         </n-flex>
-
-        <!--<Suspense>-->
-          <!--<SearchResult/>-->
-          <!--<template #fallback>
-            Loading...
-          </template>
-        </Suspense>-->
+        <n-flex justify="center">
+          <GeoJsonMap/>
+        </n-flex>
     </n-flex>
     </main>
   

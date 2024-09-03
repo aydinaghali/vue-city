@@ -2,9 +2,8 @@
 import { ref, computed, watch, type VNode, type VNodeChild } from "vue"
 import { Search12Regular } from '@vicons/fluent'
 import { searchCities } from "@/lib/SearchCities.mjs";
-import type { SelectOption } from "naive-ui";
 
-const WaitInterval = 1000;
+const WaitInterval = 500;
 
 const text = ref("")
 const options = ref([]);
@@ -36,18 +35,7 @@ watch(text, (newText) => {
   /*searchCities(newText).then((val)=>
     val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
   )).then((val) => options.value = val);*/
-  //++i;
 });
-
-/*function renderLabel(option: SelectOption): VNodeChild{
-  return [option.label as string, ", ", (option.value as string).split(",")[1]]
-}*/
-
-/*function showOptions(){
-  searchCities(text.value).then((val)=>
-    val.result.map((e: any) => {return {label: `${e.name}, ${e.country}`, value: `${e.geonameid}`}}
-  )).then((val) => options.value = val);
-}*/
 
 </script>
 
